@@ -17,14 +17,15 @@
 
     <section>
         <div class="flex justify-around space-x-5 mx-10">
-            <div class="border-2 p-2">
+            <!-- Box 1 -->
+            <div class="border-2 p-2 box">
                 <img src="lunettes 2.png" alt="lunettes">
                 <div class="flex justify-center">
                     <p> <b>DES PAIRES DE LUNETTE TEYILA</b></p>
                 </div>
                 <div class="flex justify-around">
                     <p>Prix unitaire</p>
-                    <p>7000</p>
+                    <p>2500</p>
                 </div>
                 <div class="flex justify-around">
                     <p>Quantité</p>
@@ -32,21 +33,26 @@
                 </div>
                 <div class="flex justify-around">
                     <p>A payer</p>
-                    <p>0</p>
+                    <p class="price">0</p>
                 </div>
                 <div class="flex justify-center space-x-4 mt-2">
                     <button class="border-2 p-2">-</button>
                     <button class="border-2 p-2">+</button>
                 </div>
+                <div class="flex justify-center">
+                    <button class="likebtn p-2" >❤️</button>
+                    <button class="poubbtn p-2">🗑️</button>
+                </div>
             </div>
-            <div class="border-2 p-2">
+            <!-- Box 2 -->
+            <div class="border-2 p-2 box">
                 <img src="sacoche.png" alt="Sacoche">
                 <div class="flex justify-center">
                     <p><b>SACOCHE HOMME</b></p>
                 </div>
                 <div class="flex justify-around">
                     <p>Prix unitaire</p>
-                    <p>7000</p>
+                    <p>15000</p>
                 </div>
                 <div class="flex justify-around">
                     <p>Quantité</p>
@@ -54,21 +60,26 @@
                 </div>
                 <div class="flex justify-around">
                     <p>A payer</p>
-                    <p>0</p>
+                    <p class="price">0</p>
                 </div>
                 <div class="flex justify-center space-x-4 mt-2">
                     <button class="border-2 p-2">-</button>
                     <button class="border-2 p-2">+</button>
                 </div>
+                <div class="flex justify-center">
+                    <button class="likebtn p-2" >❤️</button>
+                    <button class="poubbtn p-2">🗑️</button>
+                </div>
             </div>
-            <div class="border-2 p-2">
+            <!-- Box 3 -->
+            <div class="border-2 p-2 box">
                 <img src="lunettes.png" alt="lunettes">
                 <div class="flex justify-center">
                     <p><b>DES PAIRES DE LUNETTE</b></p>
                 </div>
                 <div class="flex justify-around">
                     <p>Prix unitaire</p>
-                    <p>7000</p>
+                    <p>4500</p>
                 </div>
                 <div class="flex justify-around">
                     <p>Quantité</p>
@@ -76,19 +87,24 @@
                 </div>
                 <div class="flex justify-around">
                     <p>A payer</p>
-                    <p>0</p>
+                    <p class="price">0</p>
                 </div>
                 <div class="flex justify-center space-x-4 mt-2">
                     <button class="border-2 p-2">-</button>
                     <button class="border-2 p-2">+</button>
                 </div>
+                <div class="flex justify-center">
+                    <button class="likebtn p-2" >❤️</button>
+                    <button class="poubbtn p-2">🗑️</button>                    
+                </div>
             </div>
         </div>
     </section>
-    <section class="mt-10 ml-12">
+    <section class="mt-10 ml-12 total">
         <div>
             <h1 class=" mb-2"><b>TOTAL A PAYER</b></h1>
-            <p>0</p>
+            <span id="afficher">0</span>
+        
         </div>
     </section>
 
