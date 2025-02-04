@@ -1,67 +1,100 @@
-// alert ('Welcome back my dude')
-var produit=document.getElementsByClassName("box")
-
-
-for( let i=0; i<produit.length; i++){
-    let btnplus= produit[i].children[5].children[1]
-    let btnMoins= produit[i].children[5].children[0]
-    let quantité= produit[i].children[3].children[1]
-    let Apayer= produit[i].children[4].children[1]
-    let PU= produit[i].children[2].children[1]
-    let prixU= parseInt (PU.innerText)
-    let qty= parseInt(quantité.innerText)
-    
-    btnplus.addEventListener("click",function(){
-        qty++
-        quantité.innerText=qty
-        Apayer.innerText=PU.innerText*qty
-        somme()
-    })
-
-    
-    btnMoins.addEventListener("click",function(){
-        if(qty>0){
-            qty--
-        quantité.innerText=qty
-        Apayer.innerText=PU.innerText*qty
-        }
-        somme()
-    })
-    
-}
-
-    let totalPrice = document.getElementById("afficher")
-    console.log(totalPrice)
-
-function somme (){
-    let sum = 0
-    let totalU=document.getElementsByClassName("price")
-    for( let i=0; i<totalU.length; i++){
-        let totaux= parseInt(totalU[i].innerText)
-        sum = sum + totaux
-        console.log(sum);
-        
+class Product {
+    constructor(id, name, price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
     }
-    totalPrice.innerHTML=sum
 }
-var likeButtons = document.getElementsByClassName("likebtn");
 
-for (let i = 0; i < likeButtons.length; i++) {
-    likeButtons[i].addEventListener("click", function () {
-        if (this.style.backgroundColor === "red") {
-            this.style.backgroundColor = "black";
-            this.style.color = "white";
+class ShoppingCartItem {
+    constructor(product, quantity = 1) {
+        this.product = product;
+        this.quantity = quantity;
+    }
+
+    getTotalPrice() {
+        return this.product.price * this.quantity;
+    }
+}
+
+class ShoppingCart {
+    constructor() {
+        this.items = [];
+    }
+
+    addItem(product, quantity = 1) {
+        let existingItem = this.items.find(item => item.product.id === product.id);
+        if (existingItem) {
+            existingItem.quantity += quantity;
         } else {
-            this.style.backgroundColor = "red";
-            this.style.color = "white";
+            this.items.push(new ShoppingCartItem(product, quantity));
+        }
+        this.displayCart();
+    }
+
+    removeItem(productId) {
+        this.items = this.items.filter(item => item.product.id !== productId);
+        this.displayCart();
+    }
+
+    getTotal() {
+        return this.items.reduce((total, item) => total + item.getTotalPrice(), 0);
+    }
+
+    displayCart() {
+        let totalElement = document.getElementById("afficher");
+        totalElement.innerText = this.getTotal();
+    }
+}
+
+const products = [
+    new Product(1, "Lunettes TEYILA", 2500),
+    new Product(2, "Sacoche Homme", 15000),
+    new Product(3, "Paire de Lunettes", 4500)
+];
+
+const cart = new ShoppingCart();
+
+const productBoxes = document.getElementsByClassName("box");
+for (let i = 0; i < productBoxes.length; i++) {
+    let btnPlus = productBoxes[i].children[5].children[1];
+    let btnMoins = productBoxes[i].children[5].children[0];
+    let deleteBtn = productBoxes[i].children[6].children[1];
+    let likeBtn = productBoxes[i].children[6].children[0];
+    let quantityElement = productBoxes[i].children[3].children[1];
+    let priceElement = productBoxes[i].children[4].children[1];
+    
+    let product = products[i];
+    let qty = 0;
+
+    btnPlus.addEventListener("click", function () {
+        qty++;
+        quantityElement.innerText = qty;
+        priceElement.innerText = product.price * qty;
+        cart.addItem(product, 1);
+    });
+
+    btnMoins.addEventListener("click", function () {
+        if (qty > 0) {
+            qty--;
+            quantityElement.innerText = qty;
+            priceElement.innerText = product.price * qty;
+            cart.addItem(product, -1);
         }
     });
-}
-var effacer =document.getElementsByClassName("poubbtn")
 
-for( let i=0; i<effacer.length; i++){
-    effacer[i].addEventListener("click", function(){
-        let produit = this.closest(".box")
-        produit.remove()
-    })
+    deleteBtn.addEventListener("click", function () {
+        productBoxes[i].remove();
+        cart.removeItem(product.id);
+    });
+
+    likeBtn.addEventListener("click", function () {
+        if (likeBtn.style.backgroundColor === "red") {
+            likeBtn.style.backgroundColor = "black";
+            likeBtn.style.color = "white";
+        } else {
+            likeBtn.style.backgroundColor = "red";
+            likeBtn.style.color = "white";
+        }
+    });
 }
